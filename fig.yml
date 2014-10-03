@@ -1,0 +1,22 @@
+jenkins: 
+  image: jenkins:latest
+  volumes:
+    - /media/docker/jenkins:/var/jenkins_home
+  environment:
+    VIRTUAL_HOST: jenkins.ericknecht.com
+    VIRTUAL_PORT: 8080
+
+deluge: 
+  image: aostanin/deluge:latest
+  volumes:
+    - /media/Downloads:/data
+  environment:
+    VIRTUAL_HOST: deluge.ericknecht.com
+    VIRTUAL_PORT: 8112
+proxy:
+  build: proxy
+  ports:
+     - "80:80"
+     - "443:443"
+  volumes: 
+    - /var/run/docker.sock:/tmp/docker.sock
